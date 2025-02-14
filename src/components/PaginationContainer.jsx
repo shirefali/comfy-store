@@ -8,8 +8,14 @@ const PaginationContainer = () => {
     return index + 1;
   });
 
+  const { search, pathname } = useLocation();
+  const navigate = useNavigate();
+
   const handlePageChange = (pageNumber) => {
-    console.log(pageNumber);
+    const searchParams = new URLSearchParams(search);
+    searchParams.set("page", pageNumber);
+    navigate(`${pathname}?${searchParams.toString()}`);
+    // console.log(pageNumber);
   };
 
   if (pageCount < 2) return null;
@@ -21,7 +27,10 @@ const PaginationContainer = () => {
           type="button"
           className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
-            handlePageChange("prev");
+            let prevPage = page - 1;
+            if (prevPage < 1) prevPage = pageCount;
+            handlePageChange(prevPage);
+            handlePageChange(prevPage);
           }}
         >
           prev
@@ -45,7 +54,10 @@ const PaginationContainer = () => {
           type="button"
           className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
-            handlePageChange("next");
+            let nextPage = page + 1;
+            if (nextPage > pageCount) nextPage = 1;
+            handlePageChange(nextPage);
+            handlePageChange(nextPage);
           }}
         >
           Next
