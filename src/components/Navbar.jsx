@@ -72,7 +72,7 @@ const Navbar = () => {
             <div className="indicator">
               <BsCart3 className="h-6 w-6" />
               <span className="badge badge-sm badge-primary indicator-item">
-                {numItemsInCart}
+                {Number(numItemsInCart)}
               </span>
             </div>
           </NavLink>
