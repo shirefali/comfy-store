@@ -23,12 +23,12 @@ const cartSlice = createSlice({
 
       const item = state.cartItems.find((i) => i.cartID === product.cartID);
       if (item) {
-        item.amount += Number(product.amount);
+        item.amount += product.amount;
       } else {
         state.cartItems.push(product);
       }
-      state.numItemsInCart += Number(product.amount);
-      state.cartTotal += Number(product.price) * Number(product.amount);
+      state.numItemsInCart += product.amount;
+      state.cartTotal += product.price * product.amount;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success("item added to cart");
     },
