@@ -1,6 +1,7 @@
 import { Form, Link, redirect } from "react-router-dom";
 import { SubmitBtn, FormInput } from "../components";
 import { toast } from "react-toastify";
+import { customFetch } from "../utils";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -10,6 +11,9 @@ export const action = async ({ request }) => {
     toast.success("account created successfully");
     return redirect("/login");
   } catch (error) {
+    console.log(error.response?.data);
+    console.log(error);
+
     const errorMessage =
       error?.response?.data?.error?.message ||
       "Please Double check your credentials";
