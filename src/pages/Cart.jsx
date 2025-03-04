@@ -29,7 +29,7 @@ const Cart = () => {
               proceed to checkout
             </Link>
           ) : (
-            <Link to="login" className="btn btn-primary mt-8 capitalize">
+            <Link to="/login" className="btn btn-primary mt-8 capitalize">
               please login
             </Link>
           )}
