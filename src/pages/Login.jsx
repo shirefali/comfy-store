@@ -25,6 +25,24 @@ export const action =
   };
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const loginAsGuestUser = async () => {
+    try {
+      const response = await customFetch.post("/auth/local", {
+        identifier: "test@test.com",
+        password: "secret",
+      });
+      dispatch(loginUser(response.data));
+      toast.success("Welcome Guest User");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("guest user login error. please try again");
+    }
+  };
+
   return (
     <section className="h-screen grid place-items-center">
       <Form
@@ -32,22 +50,16 @@ const Login = () => {
         className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
       >
         <h4 className="text-center text-3xl font-bold uppercase">Login</h4>
-        <FormInput
-          label="Email"
-          type="text"
-          name="identifier"
-          defaultValue="test@test.com"
-        />
-        <FormInput
-          label="Password"
-          type="password"
-          name="password"
-          defaultValue="secret"
-        />
+        <FormInput label="Email" type="text" name="identifier" />
+        <FormInput label="Password" type="password" name="password" />
         <div className="mt-4">
           <SubmitBtn text="login" className="btn-primary uppercase" />
         </div>
-        <button type="button" className="btn btn-secondary uppercase btn-block">
+        <button
+          type="button"
+          className="btn btn-secondary uppercase btn-block"
+          onClick={loginAsGuestUser}
+        >
           guest user
         </button>
         <p className="text-center">
