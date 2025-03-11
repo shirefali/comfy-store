@@ -25,7 +25,18 @@ const OrdersList = () => {
           <tbody>
             {orders.map((order) => {
               const id = order.id;
-              return <tr>single order</tr>;
+              const { name, address, numItemsInCart, orderTotal, createdAt } =
+                order.attributes;
+              const date = day(createdAt).format("hh:mm a - MMM Do, YYY");
+              return (
+                <tr key={id}>
+                  <td>{name}</td>
+                  <td>{address}</td>
+                  <td>{numItemsInCart}</td>
+                  <td>{orderTotal}</td>
+                  <td className="hidden sm:block">{date}</td>
+                </tr>
+              );
             })}
           </tbody>
         </table>
